@@ -1,0 +1,177 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>DexMachina: Functional Retargeting for Bimanual Dexterous Manipulation</title> 
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="assets/css/main.css" />
+        <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet' type='text/css'>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-W89SB0LDFH"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date()); 
+            gtag('config', 'G-W89SB0LDFH');
+        </script>
+
+        <meta property="og:url" content="https://project-dexmachina.github.io" />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="DexMachina: Functional Retargeting for Bimanual Dexterous Manipulation"/>
+        <meta property="og:description" content="DexMachina: Functional Retargeting for Bimanual Dexterous Manipulation" />
+        
+        <style>
+            body {
+                color: #2d2e2e;
+                font-family: 'Inter', sans-serif;
+                margin: 0;
+                padding: 0;
+                line-height: 1.6;
+            }
+            
+            #main {
+                padding: 5em 2em 1em;
+                max-width: 1200px;
+                width: 90%;
+                margin: 0 auto;
+                text-align: justify;
+            }
+            
+            h1 {
+                text-align: center;
+                color: #303030;
+                font-size: 2rem;
+                margin-bottom: 0.25em;
+                font-weight: 500;
+            }
+            
+            h2 {
+                text-align: center;
+                color: #687351;
+                font-size: 1.5rem;
+                font-weight: 500;
+                line-height: 1.2;
+                margin-top: 2em;
+            }
+            
+            p {
+                text-align: justify;
+                color: #303030;
+                font-size: 1rem;
+                line-height: 1.5;
+            }
+            
+            .video-container {
+                display: flex;
+                justify-content: center;
+                gap: 1em;
+                flex-wrap: wrap;
+                margin: 1em 0;
+            }
+            
+            video {
+                max-width: 100%;
+                height: auto;
+            }
+            
+            .video-container video {
+                width: 100%;
+                max-width: 600px;
+            }
+            
+            /* Special styling for the main teaser video */
+            #four .video-container video {
+                width: 90%;
+                max-width: 900px;
+            }
+            
+            img {
+                max-width: 100%;
+                height: auto;
+                margin: 0.5em auto;
+                display: block;
+            }
+            
+            /* Media queries for responsive design */
+            @media screen and (max-width: 768px) {
+                #main {
+                    width: 95%;
+                    padding: 3em 1em 1em;
+                }
+                
+                h1 {
+                    font-size: 1.5rem;
+                }
+                
+                h2 {
+                    font-size: 1.3rem;
+                }
+            }
+            
+            @media screen and (min-width: 1200px) {
+                /* The bottom dual videos */
+                section:last-child .video-container video {
+                    width: 45%;
+                }
+                
+                /* Ensure the main teaser video stays wide */
+                #four .video-container video {
+                    width: 90%;
+                    max-width: 900px;
+                }
+            }
+        </style>
+    </head>
+    <body id="top">
+        <div id="main">
+            <section id="four">
+                <h1>
+                    DexMachina: Functional Retargeting for <br> Bimanual Dexterous Manipulation 
+                </h1>  
+                <p> </p>
+                <div class="video-container">
+                    <video controls autoplay muted playsinline>
+                        <source src="compressed-dexmachina-teaser.mp4"> 
+                    </video> 
+                </div> 
+            </section>
+  
+            <section>
+                <h2>
+                    Abstract
+                </h2> 
+                <p>
+                    We study the problem of functional retargeting: learning dexterous manipulation policies to track object states from human hand-object demonstrations. We focus on long-horizon, bimanual tasks with articulated objects, which is challenging due to large action space, spatiotemporal discontinuities, and embodiment gap between human and robot hands. 
+                    We propose DexMachina, a novel curriculum-based algorithm: the key idea is to use virtual object controllers with decaying strength: an object is first driven automatically towards its target states, such that the policy can gradually learn to take over under motion and contact guidance. 
+                    We release a simulation benchmark with a diverse set of tasks and dexterous hands, and show that DexMachina significantly outperforms baseline methods. Our algorithm and benchmark enable a functional comparison for hardware designs, and we present key findings informed by quantitative and qualitative results. 
+                    With the recent surge in dexterous hand development, we hope this work will provide a useful platform for identifying desirable hardware capabilities and lower the barrier for contributing to future research.
+                </p> 
+                <div class="image-container">
+                    <img src="dexmachina-teaser-website.png" alt="DexMachina Teaser" /> 
+                </div>
+            </section> 
+
+            <section>
+                <h2>
+                    Policy Evaluation Videos
+                </h2>
+                
+                <div class="video-container">
+                    <video controls autoplay muted playsinline>
+                        <source src="assets/allegro-fast1-420_ketchup40-340-s01-u02_B12000_hybrid_thres0.5_ho16_imi0.2_con2.0_bc0.2.mp4"> 
+                    </video>
+                    <video controls autoplay muted playsinline>
+                        <source src="assets/schunk-fast1-420_waffleiron40-340-s01-u01_B12000_hybrid_thres0.5_ho16_imi0.2_bc0.2.mp4">
+                    </video>
+                </div>
+            </section> 
+        </div>
+        <!-- Scripts -->
+        <script src="assets/js/jquery.min.js"></script>
+        <script src="assets/js/jquery.poptrox.min.js"></script>
+        <script src="assets/js/skel.min.js"></script>
+        <script src="assets/js/util.js"></script>
+        <!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+        <script src="assets/js/main.js"></script>
+    </body> 
+</html>
