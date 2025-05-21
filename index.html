@@ -150,16 +150,42 @@
                 }
             }
             
-            @media screen and (min-width: 1200px) {
+            @media screen and (min-width: 1000px) {
                 /* The bottom dual videos */
                 section:last-child .video-container video {
-                    width: 45%;
+                    width: 25%;
                 }
                 
                 /* Ensure the main teaser video stays wide */
                 #four .video-container video {
                     width: 90%;
                     max-width: 900px;
+                }
+            }
+            .policy-video-container {
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                flex-wrap: wrap;
+                gap: 10px;
+                width: 100%;
+            }
+
+            .policy-video-container video {
+                width: calc(25% - 10px);
+                height: auto;
+                min-width: 200px;
+            }
+
+            @media screen and (max-width: 999px) {
+                .policy-video-container {
+                    flex-direction: column;
+                    align-items: center;
+                }
+                
+                .policy-video-container video {
+                    width: 90%;
+                    max-width: 500px;
                 }
             }
         </style>
@@ -195,7 +221,7 @@
 
                 <h3 style="text-align: center;font-size: 100%; color: #2d2e2e">
                     <!-- <a href="https://arxiv.org/abs/2406.08474">Arxiv</a> -->
-                    arXiv
+                    <a href="https://project-dexmachina.github.io/DexMachina_paper.pdf">Paper</a>
                     <!-- &nbsp <a href="https://github.com/MandiZhao/real2code">Code</a> -->
                 </p> 
                 
@@ -354,37 +380,39 @@
 
             </section>
 
-            <!-- <section>
-                <h2>
-                    Policy Evaluation Videos
-                </h2>
+            <section>
+                <h3>
+                    Additional Policy Evaluation Videos
+                </h3>
                 
-                <div class="video-container">
+                <div class="policy-video-container">
                     <video controls autoplay muted playsinline>
-                        <source src="assets/allegro-fast1-420_ketchup40-340-s01-u02_B12000_hybrid_thres0.5_ho16_imi0.2_con2.0_bc0.2.mp4"> 
+                        <source src="assets/allegro-fast1-420_box30-230-s01-u01_B12000_hybrid_thres0.5_ho16_imi0.2_con2.0_bc0.2_pwgtcufu.mp4">
                     </video>
                     <video controls autoplay muted playsinline>
-                        <source src="assets/schunk-fast1-420_waffleiron40-340-s01-u01_B12000_hybrid_thres0.5_ho16_imi0.2_bc0.2.mp4">
+                        <source src="assets/inspire-fast1-420_box30-230-s01-u01_B12000_hybrid_thres0.5_ho16_imi0.2_con2.0_bc0.2_6fyf9pa5.mp4"> 
+                    </video>
+                    <video controls autoplay muted playsinline>
+                        <source src="assets/schunk-fast1-420_box30-230-s01-u01_B12000_hybrid_thres0.5_ho16_imi0.2_con2.0_bc0.2_vpzrrfg3.mp4">
+                    </video>
+                    <video controls autoplay muted playsinline>
+                        <source src="assets/xhand-fast1-420_box30-230-s01-u01_B12000_hybrid_thres0.5_ho16_imi0.2_con2.0_bc0.2_aab917u2.mp4">
                     </video>
                 </div>
-            </section>  -->
+            </section> 
 
             <section>
                 <h2>
                     Acknowledgements
                 </h2> 
                 <p>
-                    We thank Kelly Guo, Milad Raksham and David Hoeller for their help with physics simulation environments.
                     This work was supported in part by NVIDIA, NSF Award #2143601, #2037101, and #2132519.
                     The views and conclusions contained herein are those of the authors and should not be interpreted as necessarily representing the official policies, either expressed or implied, of the sponsors.
+                    The authors would like to thank current and former colleagues at NVIDIA: Kelly Guo, Milad Raksha, David Hoeller, Bingjie Tang for their help with physics simulation environments and insightful discussions during algorithm development; and all the members of REALab at Stanford University for providing useful feedback on initial drafts of the paper manuscript. 
                 </p>  
             </section> 
-
-            
-
+ 
         </div>
-
-        
 
         <!-- Scripts -->
         <script src="assets/js/jquery.min.js"></script>
