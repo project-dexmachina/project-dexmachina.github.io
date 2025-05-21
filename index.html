@@ -31,7 +31,7 @@
             
             #main {
                 padding: 5em 2em 1em;
-                max-width: 1200px;
+                max-width: 1000px;
                 width: 90%;
                 margin: 0 auto;
                 text-align: justify;
@@ -48,6 +48,15 @@
             h2 {
                 text-align: center;
                 color: #687351;
+                font-size: 2rem;
+                font-weight: 500;
+                line-height: 1.2;
+                margin-top: 2em;
+            }
+
+            h3 {
+                text-align: center;
+                color: #687351;
                 font-size: 1.5rem;
                 font-weight: 500;
                 line-height: 1.2;
@@ -55,10 +64,14 @@
             }
             
             p {
+                /* align to the center of main */
                 text-align: justify;
+                margin: 0 auto;
+                padding: 0em 0; 
                 color: #303030;
                 font-size: 1rem;
                 line-height: 1.5;
+                max-width: 85%;
             }
             
             .video-container {
@@ -76,7 +89,7 @@
             
             .video-container video {
                 width: 100%;
-                max-width: 600px;
+                max-width: 900px;
             }
             
             /* Special styling for the main teaser video */
@@ -90,6 +103,35 @@
                 height: auto;
                 margin: 0.5em auto;
                 display: block;
+            }
+
+            /* Add this to your existing CSS */
+            .text-video-container {
+                display: flex;
+                align-items: center;
+                gap: 1.6em;
+                margin: 1em 0;
+            }
+
+            .text-video-container p {
+                flex: 3;
+                margin: 0;
+                text-align: center;
+            }
+
+            .text-video-container .video-container {
+                flex: 7;
+                margin: 0;
+            }
+
+            /* Make it responsive by modifying your media query */
+            @media screen and (max-width: 768px) {
+                /* Your existing mobile styles */
+                
+                /* Stack text and video on mobile */
+                .text-video-container {
+                    flex-direction: column;
+                }
             }
             
             /* Media queries for responsive design */
@@ -128,10 +170,38 @@
                 <h1>
                     DexMachina: Functional Retargeting for <br> Bimanual Dexterous Manipulation 
                 </h1>  
-                <p> </p>
+                <p></p>
+                <h3 style="text-align: center; font-size: 100%; color: #2d2e2e">
+                    <a href="https://mandizhao.github.io">Mandi Zhao</a><sup>1*</sup> 
+                    <a href="https://yifan-hou.github.io/">Yifan Hou</a><sup>1</sup> 
+                    <a href="https://homes.cs.washington.edu/~fox/">Dieter Fox</a><sup>2</sup>
+                    <a href="https://research.nvidia.com/person/yashraj-narang">Yashraj Narang</a><sup>2</sup>
+                    <a href="https://ai.stanford.edu/~amandlek/">Ajay Mandlekar</a><sup>2†</sup>
+                    <a href="https://shurans.github.io/">Shuran Song</a><sup>1†</sup>
+				</h3>
+                <h3 style="text-align: center;font-size: 80%; color: #2d2e2e"> 
+                        <sup>1</sup> Stanford University &nbsp 
+                        <sup>2</sup> NVIDIA &nbsp 
+                        <sup>*</sup> Work partially done during internship &nbsp
+                        <sup>†</sup> Equal advising 
+                        <!-- <img style="max-width: 15%" src="assets/nvidia_logo.jpg"/> 
+                        <img style="max-width: 15%" src="assets/stanford_logo.png"/> --> 
+                        <div class="image-container"> 
+                            <img style="display: inline-block; width: 15%;" src="assets/nvidia_logo.jpg"/> &nbsp &nbsp &nbsp
+                            <img style="display: inline-block; width: 13%;" src="assets/stanford_logo.png"/> 
+                        </div>
+                        
+                </h3> 
+
+                <h3 style="text-align: center;font-size: 100%; color: #2d2e2e">
+                    <!-- <a href="https://arxiv.org/abs/2406.08474">Arxiv</a> -->
+                    arXiv
+                    <!-- &nbsp <a href="https://github.com/MandiZhao/real2code">Code</a> -->
+                </p> 
+                
                 <div class="video-container">
                     <video controls autoplay muted playsinline>
-                        <source src="compressed-dexmachina-teaser.mp4"> 
+                        <source src="compressed-dexmachina-deanon-teaser.mp4"> 
                     </video> 
                 </div> 
             </section>
@@ -152,6 +222,139 @@
             </section> 
 
             <section>
+                <h2>Method</h2>
+                
+                <h3>
+                    Overview
+                </h3>
+
+                <p>
+                    We propose DexMachina, a novel algorithm that achieves functional retargeting for a variety of hands and objects. 
+                    At a high-level, we train an RL policy using a virtual object controller curriculum, guided by both a task reward and auxiliary rewards.
+                </p> 
+                <div class="image-container">
+                    <img src="assets/dexmachina-method.jpg" alt="DexMachina Method" /> 
+                </div>
+ 
+                <h3>Task and Auxiliary Rewards</h3>
+                <p>
+                    Given one demonstration, we first use its object states to define task reward. Next, we run a collision-aware kinematic retargeting procedure, which produces reference dexterous hand motions: we use them for motion imitation reward and residual wrist actions. We then approximate hand-object contact positions, which we use to define contact reward. 
+                </p>
+                <div class="video-container">
+                    <video controls autoplay muted playsinline>
+                        <source src="assets/compressed-dexmachina-method-video.mp4">
+                    </video> 
+                </div>   
+                <!-- <div class="text-video-container">
+                    <p>
+                        Given one demonstration, we first use its object states to define task reward. Next, we run a collision-aware kinematic retargeting procedure, which produces reference dexterous hand motions: we use them for motion imitation reward and residual wrist actions. We then approximate hand-object contact positions, which we use to define contact reward.
+                    </p>
+                    <div class="video-container">
+                        <video controls autoplay muted playsinline>
+                            <source src="assets/compressed-dexmachina-method-video.mp4">
+                        </video>
+                    </div>
+                </div> -->
+
+                <h3>
+                    Virtual Object Controller Curriculum
+                </h3>
+                <p>
+                    The reward terms and residual action learning can sometimes achieve short and simple tasks, but struggle on long-horizon clips with complex contacts, where the policy often experiences catastrophic early failures.
+                    This motivates us to propose a novel curriculum approach, to let the policy explore different strategies in a less fragile setting. 
+                </p>
+                <div class="video-container">
+                    <video controls autoplay muted playsinline>
+                        <source src="assets/compressed-dexmachina-voc-video.mp4">
+                    </video> 
+                </div>  
+            </section>
+            <section>
+                <h2>
+                    Evaluation Results
+                </h2>
+
+                <h3>
+                    Experiment Setup
+                </h3>
+                <p>
+                    To evaluate dexmachina, we use a subset of ARCTIC data which includes 5 articulated objects and 7 clips consisting of diverse motion sequences and both long and short-horizon demonstrations. 
+                    We curate assets for 6 open-source dexterous robot hand models, with varying sizes and kinematic designs.
+                </p>
+                <div class="video-container">
+                    <video controls autoplay muted playsinline>
+                        <source src="assets/compressed-dexmachina-exp-setup-video.mp4">
+                    </video> 
+                </div>  
+
+                <h3>
+                    DexMachina out-performs baseline methods across all tasks and hands
+                </h3>
+
+                <p>
+                    We first evaluate on 4 hands. We compare dexmachina with direct replay of kinematic retargeting results, two baseline methods, and training with our proposed rewards but without curriculum. With rare exceptions, our method consistently achieves the best performance across all the hands and tasks, especially on long-horizon tasks with complex motion sequences. 
+                </p>
+
+                <div class="image-container">
+                    <img src="assets/yolo_ADD_AUC.png" alt="DexMachina Yolo AUC" />
+                </div> 
+
+                <h3>
+                    Kinematic retargeting does not produce feasible actions 
+                </h3>
+                <p>
+                    Without policy learning, kinematic retargeting can produce human-like hand motions, but when we play the retargeting results in simulation, they are not feasible for completing the task.
+                </p>
+                <div class="video-container">
+                    <video controls autoplay muted playsinline>
+                        <source src="assets/compressed-dexmachina-kine-video.mp4">
+                    </video> 
+                </div> 
+
+                <h3>
+                    DexMachina handles long task horizons without early failures
+                </h3>
+                <p>
+                    Compared to ObjDex baseline which uses only task reward, our method can handle longer horizon tasks without early failures.
+                </p>
+                <div class="video-container">
+                    <video controls autoplay muted playsinline>
+                        <source src="assets/compressed-dexmachina-objdex-video.mp4">
+                    </video>
+                </div>
+                
+                <h3>
+                    DexMachina allows policies to adapt to their hardware constraints
+                </h3>
+                 <p> 
+                    For example, on the Notebook task, the XHand policy follows the human demonstrator to use the left hand to hold up the object and the right hand to close the cover,
+                    But for the smaller, less-actuated Inspire Hand, the policy learns to use both hands to stabilize the object and close the cover, despite using the same human hand motion reference as Xhand
+                </p>
+                <div class="image-container">
+                    <img src="assets/dexmachina-qual-highlighted.001.jpeg" alt="DexMachina Qualitative Results" style="max-width: 80%;" />
+                </div> 
+
+
+
+                <h3>
+                    DexMachina enables a functional comparison between hardware designs
+                </h3>
+                 <p> 
+                    With an effective functional retargeting algorithm, we can now perform a functional comparison between different dexterous hands. We focus on the 4 long-horizon tasks, and evaluate dexMachina on two additional hands. We compare the performance of all the hands and discuss key empirical findings. 
+                    Overall, we see the larger, fully-actuated hands can achieve both higher final performance and better learning efficiency.
+                    Interestingly, degrees of freedom is more important than hand sizes.
+                    Schunk hand and Xhand, for example, have more actuated fingers, and perform much better than Inspire hand and ability hand which are similar in size to human hands
+
+                    With the recent surge in dexterous hand development, we hope our work will provide a useful platform, that can help identify desirable hardware capabilities and lower the contribution barrier for future research. 
+               
+                 </p>
+                <div class="image-container">
+                    <img src="assets/dexmachina-6hands.001.jpeg" alt="DexMachina 6 Hands" style="max-width: 80%;" />
+                </div> 
+
+            </section>
+
+            <!-- <section>
                 <h2>
                     Policy Evaluation Videos
                 </h2>
@@ -164,8 +367,25 @@
                         <source src="assets/schunk-fast1-420_waffleiron40-340-s01-u01_B12000_hybrid_thres0.5_ho16_imi0.2_bc0.2.mp4">
                     </video>
                 </div>
+            </section>  -->
+
+            <section>
+                <h2>
+                    Acknowledgements
+                </h2> 
+                <p>
+                    We thank Kelly Guo, Milad Raksham and David Hoeller for their help with physics simulation environments.
+                    This work was supported in part by NVIDIA, NSF Award #2143601, #2037101, and #2132519.
+                    The views and conclusions contained herein are those of the authors and should not be interpreted as necessarily representing the official policies, either expressed or implied, of the sponsors.
+                </p>  
             </section> 
+
+            
+
         </div>
+
+        
+
         <!-- Scripts -->
         <script src="assets/js/jquery.min.js"></script>
         <script src="assets/js/jquery.poptrox.min.js"></script>
