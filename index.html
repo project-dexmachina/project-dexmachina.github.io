@@ -19,7 +19,6 @@
         <meta property="og:type" content="website" />
         <meta property="og:title" content="DexMachina: Functional Retargeting for Bimanual Dexterous Manipulation"/>
         <meta property="og:description" content="DexMachina: Functional Retargeting for Bimanual Dexterous Manipulation" />
-        
         <style>
             body {
                 color: #2d2e2e;
@@ -31,7 +30,7 @@
             
             #main {
                 padding: 5em 2em 1em;
-                max-width: 1000px;
+                max-width: 1200px;
                 width: 90%;
                 margin: 0 auto;
                 text-align: justify;
@@ -89,13 +88,13 @@
             
             .video-container video {
                 width: 100%;
-                max-width: 900px;
+                max-width: 800px;
             }
             
             /* Special styling for the main teaser video */
             #four .video-container video {
                 width: 90%;
-                max-width: 900px;
+                max-width: 800px;
             }
             
             img {
@@ -103,35 +102,6 @@
                 height: auto;
                 margin: 0.5em auto;
                 display: block;
-            }
-
-            /* Add this to your existing CSS */
-            .text-video-container {
-                display: flex;
-                align-items: center;
-                gap: 1.6em;
-                margin: 1em 0;
-            }
-
-            .text-video-container p {
-                flex: 3;
-                margin: 0;
-                text-align: center;
-            }
-
-            .text-video-container .video-container {
-                flex: 7;
-                margin: 0;
-            }
-
-            /* Make it responsive by modifying your media query */
-            @media screen and (max-width: 768px) {
-                /* Your existing mobile styles */
-                
-                /* Stack text and video on mobile */
-                .text-video-container {
-                    flex-direction: column;
-                }
             }
             
             /* Media queries for responsive design */
@@ -149,46 +119,9 @@
                     font-size: 1.3rem;
                 }
             }
-            
-            @media screen and (min-width: 1000px) {
-                /* The bottom dual videos */
-                section:last-child .video-container video {
-                    width: 25%;
-                }
-                
-                /* Ensure the main teaser video stays wide */
-                #four .video-container video {
-                    width: 90%;
-                    max-width: 900px;
-                }
-            }
-            .policy-video-container {
-                display: flex;
-                flex-direction: row;
-                justify-content: center;
-                flex-wrap: wrap;
-                gap: 10px;
-                width: 100%;
-            }
-
-            .policy-video-container video {
-                width: calc(25% - 10px);
-                height: auto;
-                min-width: 200px;
-            }
-
-            @media screen and (max-width: 999px) {
-                .policy-video-container {
-                    flex-direction: column;
-                    align-items: center;
-                }
-                
-                .policy-video-container video {
-                    width: 90%;
-                    max-width: 500px;
-                }
-            }
-        </style>
+             
+        </style> 
+                 
     </head>
     <body id="top">
         <div id="main">
@@ -208,7 +141,7 @@
                 <h3 style="text-align: center;font-size: 80%; color: #2d2e2e"> 
                         <sup>1</sup> Stanford University &nbsp 
                         <sup>2</sup> NVIDIA &nbsp 
-                        <sup>*</sup> Work partially done during internship &nbsp
+                        <sup>*</sup> Work partially done at internship &nbsp
                         <sup>†</sup> Equal advising 
                         <!-- <img style="max-width: 15%" src="assets/nvidia_logo.jpg"/> 
                         <img style="max-width: 15%" src="assets/stanford_logo.png"/> --> 
@@ -221,18 +154,16 @@
 
                 <h3 style="text-align: center;font-size: 100%; color: #2d2e2e">
                     <!-- <a href="https://arxiv.org/abs/2406.08474">Arxiv</a> -->
-                    <a href="https://project-dexmachina.github.io/DexMachina_paper.pdf">Paper</a>
+                    <a href="http://arxiv.org/abs/2505.24853">arXiv</a>
                     &nbsp <a href="https://github.com/MandiZhao/dexmachina">Code</a>
                 </p> 
                 
-                <div class="video-container">
+                <div class="video-container" >
                     <video controls autoplay muted playsinline>
                         <source src="compressed-dexmachina-deanon-teaser.mp4"> 
                     </video> 
                 </div> 
-            </section>
-  
-            <section>
+            
                 <h2>
                     Abstract
                 </h2> 
@@ -243,10 +174,22 @@
                     With the recent surge in dexterous hand development, we hope this work will provide a useful platform for identifying desirable hardware capabilities and lower the barrier for contributing to future research.
                 </p> 
                 <div class="image-container">
-                    <img src="dexmachina-teaser-website.png" alt="DexMachina Teaser" /> 
+                    <img src="dexmachina-teaser-website.png" alt="DexMachina Teaser"  style="max-width: 80%;" /> 
                 </div>
             </section> 
 
+            <!-- embed a youtube video -->
+            <section>
+                <h2>Long Naratted Video</h2>
+                
+                <iframe width="900" height="500" 
+                        style="display: block; margin: 0 auto;"
+                        src="https://www.youtube.com/embed/0F_DhnyKdOE" 
+                        title="Long Video" 
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                        allowfullscreen>
+                </iframe> 
             <section>
                 <h2>Method</h2>
                 
@@ -259,7 +202,7 @@
                     At a high-level, we train an RL policy using a virtual object controller curriculum, guided by both a task reward and auxiliary rewards.
                 </p> 
                 <div class="image-container">
-                    <img src="assets/dexmachina-method.jpg" alt="DexMachina Method" /> 
+                    <img src="assets/dexmachina-method.jpg" alt="DexMachina Method" style="max-width: 85%;" />
                 </div>
  
                 <h3>Task and Auxiliary Rewards</h3>
@@ -297,7 +240,7 @@
             </section>
             <section>
                 <h2>
-                    Evaluation Results
+                    Experiment Results
                 </h2>
 
                 <h3>
@@ -322,7 +265,7 @@
                 </p>
 
                 <div class="image-container">
-                    <img src="assets/yolo_ADD_AUC.png" alt="DexMachina Yolo AUC" />
+                    <img src="assets/yolo_ADD_AUC.png" alt="DexMachina Yolo AUC" style="max-width: 80%;" />
                 </div> 
 
                 <h3>
@@ -354,10 +297,11 @@
                 </h3>
                  <p> 
                     For example, on the Notebook task, the XHand policy follows the human demonstrator to use the left hand to hold up the object and the right hand to close the cover,
-                    But for the smaller, less-actuated Inspire Hand, the policy learns to use both hands to stabilize the object and close the cover, despite using the same human hand motion reference as Xhand
+                    But for the smaller, less-actuated Inspire Hand, the policy learns to use both hands to stabilize the object and close the cover, despite using the same human hand motion reference as Xhand.
+                    Similarly, for the Mixer task, Allegro Hand uses its longer and more flexible thumb to close the mixer lid, but Schunk Hand learns to move the wrist forward and close with its palm. 
                 </p>
                 <div class="image-container">
-                    <img src="assets/dexmachina-qual-highlighted.001.jpeg" alt="DexMachina Qualitative Results" style="max-width: 80%;" />
+                    <img src="assets/dexmachina-qual-highlighted.001.jpeg" alt="DexMachina Qualitative Results" style="max-width: 70%;" />
                 </div> 
 
 
@@ -380,7 +324,7 @@
 
             </section>
 
-            <section>
+            <!-- <section>
                 <h3>
                     Additional Policy Evaluation Videos
                 </h3>
@@ -399,6 +343,20 @@
                         <source src="assets/xhand-fast1-420_box30-230-s01-u01_B12000_hybrid_thres0.5_ho16_imi0.2_con2.0_bc0.2_aab917u2.mp4">
                     </video>
                 </div>
+            </section>  -->
+            <section>
+                <h3>
+                    Additional Policy Evaluation Videos
+                </h3>
+                
+                <p>
+                    Using our method on the 3 short-horizon tasks, all hands can achieve between 70 to up to 90% success rate in object tracking AUC-ADD metric.
+                </p>
+                <div class="policy-video-container">
+                    <video controls autoplay muted playsinline>
+                        <source src="assets/compressed-dexmachina-ours-short3-video.mp4">
+                    </video> 
+                </div>
             </section> 
 
             <section>
@@ -410,7 +368,12 @@
                     The views and conclusions contained herein are those of the authors and should not be interpreted as necessarily representing the official policies, either expressed or implied, of the sponsors.
                     The authors would like to thank current and former colleagues at NVIDIA: Kelly Guo, Milad Raksha, David Hoeller, Bingjie Tang for their help with physics simulation environments and insightful discussions during algorithm development; and all the members of REALab at Stanford University for providing useful feedback on initial drafts of the paper manuscript. 
                 </p>  
+
+                <p>&nbsp</p>
+                <p>&nbsp</p>
+                <p>&nbsp</p>
             </section> 
+        </div>
  
         </div>
 
