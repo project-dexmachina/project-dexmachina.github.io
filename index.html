@@ -478,38 +478,44 @@
             <h3 id="reward-weights"> Reward Weights Ablation</h3>
 
             <p> Additional ablation results to show the effect of different reward weights on the final performance. 
-                We remark that the maximum achievable reward for both the task reward and each auxiliary reward terrm is always 1.0, and the task reward is always weighted with 1.0.
+                The maximum achievable reward for both the task reward and each auxiliary reward terrm is always 1.0, and the task reward is always weighted with 1.0.
                 In the experiments below, we vary the weights for motion imitation, behavior cloning and contact reward, while keeping other settings exactly the same. 
                 Each curve uses a different combination of reward weights, and we plot the task reward (which directly reflects object tracking performances) and auxiliary rewards. 
+
                 Although we could not finish an exhaustive pass on all the possible weight combinations due to the limited bandwidth during this rebuttal period, we remark the overall trend that
                 the task performance (which matters the most) is relatively robust to different auxiliary reward weights, as long as they are not too small (e.g. 0.1) to provide sufficient guidance.
             </p>
 
             <div class="image-container">
-                <img src="iclr-rebuttal-rew-weights.jpg" alt="DexMachina Reward Weights Ablation" style="max-width: 80%;" />
+                <img src="iclr-rebuttal-rew-weights.png" alt="DexMachina Reward Weights Ablation" style="max-width: 80%;" />
             </div>
 
             <h3 id="curriculum-hyperparams"> Curriculum Hyperparameters</h3>
-            <p> We provide additional experiments to test the sensitibity of our RL training to different hyperparameters for our VOC curriculm.</p>
+            <p> 
+                We provide additional experiments to test the sensitibity of our RL training to different hyperparameters for our VOC curriculm.
+                Note that the curves are plotted when a heavier width when the VOC controller gains are reduced to 0, i.e. no virtual forces are applied and the policy must take over 
+                the manipulation.
+
+            </p>
             
             <ol> 
-                  <li style="font-size: 0.8em; font-weight: bold;">Decay reward thresholds.</li>
+                  <li style="font-size: 0.99em; font-weight: bold;">Decay reward thresholds.</li>
                     <p>We keep a separate deque and threshold for each reward term (i.e. task reward, contact reward, imitation reward), and only decay the curriculum's VOC controller gains when the achieved rewards are above the given threshold. 
                     In the below experiments, we keep the task reward threshold the same (0.6) and compare using 0.01 vs 0 for the auxiliary rewards thresholds. 
                     We observe that, while the two cases achieve similar task reward after VOC controller gains are decayed to zero and both have a downward trend on the auxiliary rewards, 
                     having a small non-zero threshold makes the policy achieve slightly higher on the auxiliary rewards, and we qualitatively see a style difference in the learned policy behaviors. 
                     This suggests our framework offers certain flexibility that allows a user to adjust the policy behaviors by tuning these thresholds while not interfering with the task performance.
                 </p>
-                <img src="iclr-rebuttal-reward-thres.jpg" style="max-width: 80%;" />
+                <img src="iclr-rebuttal-reward-thres.png" style="max-width: 80%;" />
                 
-                <li style="font-size: 0.8em; font-weight: bold;">Curriculum rewards dequeue lengths.</li>
+                <li style="font-size: 0.99em; font-weight: bold;">Curriculum rewards dequeue lengths.</li>
                     <p> We compare different deque lengths (30, 60, 90) under the same task and robot hand setting. Intuitively, a longer deque means the moving reward average gets updated more slowly. 
                         Hence we observe overall similar task reward outcomes, but slightly longer training walltime when the deque length is longer. 
                     </p>
-                    <img src="iclr-rebuttal-deque-length.jpg" alt="DexMachina Curriculum Deque Length Ablation" style="max-width: 80%;" />
+                    <img src="iclr-rebuttal-deque-length.png" alt="DexMachina Curriculum Deque Length Ablation" style="max-width: 80%;" />
                     
                 
-                <li style="font-size: 0.8em; font-weight: bold;">VOC controller gain decay ratio.</li>
+                <li style="font-size: 0.99em; font-weight: bold;">VOC controller gain decay ratio.</li>
                     <p> 
                         In our VOC curriculum, the controller gain values (i.e. kp and kv) are drawn from a uniform distribution with decaying upper and lower bounds. For example, we sample (N,) different kp values (N=number of parallel RL environments) from where the bounds are exponentially decayed at every iteration where the rewards are above their respective thresholds.
 
@@ -517,10 +523,10 @@
                         kp_lower = kp_lower_prev * kp_decay_factor_lower,  kp_upper = kp_upper_prev * kp_decay_factor_upper.  
                         
                         Therefore, different decay_factors determine different sampling ranges for the gain distributions. 
-                        In the additional experiments, we fix kp_decay_factor_upper=0.9 and vary kp_decay_factor_lower from 0.5 to 0.8 ('wider' vs 'narrower'), 
+                        In the additional experiments below, we fix kp_decay_factor_upper=0.9 and vary kp_decay_factor_lower from 0.5 to 0.8 (hence the plotted kp ranges are 'wider' vs 'narrower'), 
                         and show that the task performance (i.e. object tracking accuracy) is relatively insensitive to different bounds, but a 'tighter' bound (i.e. kp_decay_factor_lower=0.9) results in lower performance, which suggests learning is more robust if the policy is exposed to a wide range of different VOC dynamics. 
                     </p>
-                    <img src="iclr-rebuttal-decay-ratio.jpg" alt="DexMachina Curriculum Decay Ratio Ablation" style="max-width: 80%;" />
+                    <img src="iclr-rebuttal-decay-ratio.png" alt="DexMachina Curriculum Decay Ratio Ablation" style="max-width: 80%;" />
         </div>
         
         <script>
