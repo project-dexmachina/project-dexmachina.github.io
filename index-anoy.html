@@ -1,0 +1,659 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>DexMachina: Functional Retargeting for Bimanual Dexterous Manipulation</title> 
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="assets/css/main.css" />
+        <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet' type='text/css'>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-W89SB0LDFH"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date()); 
+            gtag('config', 'G-W89SB0LDFH');
+        </script> 
+        <meta property="og:url" content="https://project-roco.github.io" />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="DexMachina: Functional Retargeting for Bimanual Dexterous Manipulation"/>
+        <meta property="og:description" content="DexMachina: Functional Retargeting for Bimanual Dexterous Manipulation" /> 
+        <style>
+            body {
+                color: #2d2e2e;
+                font-family: 'Inter', sans-serif;
+                margin: 0;
+                padding: 0;
+                line-height: 1.6;
+                scroll-behavior: smooth;
+            }
+            
+            #main {
+                padding: 5em 2em 1em;
+                max-width: 1200px;
+                width: 90%;
+                margin: 0 auto;
+                text-align: justify;
+                transition: margin-left 0.3s ease;
+            }
+            
+            h1 {
+                text-align: center;
+                color: #303030;
+                font-size: 2rem;
+                margin-bottom: 0.25em;
+                font-weight: 500;
+            }
+            
+            h2 {
+                text-align: center;
+                color: #687351;
+                font-size: 1.5rem;
+                font-weight: 500;
+                line-height: 1.2;
+                margin-top: 2em;
+                position: relative;
+                scroll-margin-top: 2em;
+            }
+            
+            h3 {
+                color: #687351;
+                font-size: 1.25rem;
+                font-weight: 500;
+                margin-top: 1.5em;
+                position: relative;
+                scroll-margin-top: 2em;
+            }
+            
+            /* Link icon for headings */
+            h2::before, h3::before {
+                content: "🔗";
+                position: absolute;
+                left: -1.5em;
+                opacity: 0;
+                transition: opacity 0.2s;
+                font-size: 0.8em;
+                cursor: pointer;
+            }
+            
+            h2:hover::before, h3:hover::before {
+                opacity: 0.6;
+            }
+            
+            /* Navigation bar */
+            .nav-bar {
+                position: fixed;
+                top: 0;
+                left: 0;
+                bottom: 0;
+                width: 180px;
+                background: rgba(248, 249, 250, 0.65);
+                backdrop-filter: blur(2px);
+                -webkit-backdrop-filter: blur(2px);
+                border-right: 1px solid rgba(233, 236, 239, 0.65);
+                padding: 1.5em 1em;
+                z-index: 1000;
+                transform: translateX(-100%);
+                transition: transform 0.3s ease;
+                overflow-y: auto;
+                box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+            }
+            
+            .nav-bar.visible {
+                transform: translateX(0);
+            }
+            
+            .nav-links {
+                display: flex;
+                flex-direction: column;
+                gap: 1.2em;
+                align-items: flex-start;
+            }
+            
+            .nav-links a {
+                color: #687351;
+                text-decoration: none;
+                font-weight: 500;
+                transition: color 0.2s;
+                padding: 0.4em 0;
+                border-bottom: 1px solid transparent;
+                width: 100%;
+                font-size: 14px;
+            }
+            
+            .nav-links a:hover {
+                color: #303030;
+                border-bottom-color: #687351;
+            }
+            
+            /* Nav header with title and close button */
+            .nav-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 1.5em;
+            }
+            
+            .nav-title {
+                font-size: 16px;
+                font-weight: 600;
+                color: #303030;
+                line-height: 1.3;
+                flex: 1;
+                min-width: 0;
+                margin-right: 0.75em;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+            
+            /* Close button inside nav */
+            .nav-close {
+                background: #dc3545;
+                color: white;
+                border: none;
+                padding: 0.4em 0.6em;
+                border-radius: 4px;
+                cursor: pointer;
+                font-size: 14px;
+                transition: all 0.2s ease;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+                flex-shrink: 0;
+                min-width: auto;
+            }
+            
+            .nav-close:hover {
+                background: #c82333;
+                transform: translateY(-1px);
+                box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            }
+            
+            p {
+                text-align: justify;
+                color: #303030;
+                font-size: 1rem;
+                line-height: 1.5;
+            }
+            
+            .video-container {
+                display: flex;
+                justify-content: center;
+                gap: 1em;
+                flex-wrap: wrap;
+                margin: 1em 0;
+            }
+            
+            /* Uniform video sizing - all videos same size as teaser */
+            .video-container video {
+                width: 90%;
+                max-width: 800px;
+                height: auto;
+            }
+
+            .video-row {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 1em;
+                flex-wrap: wrap; /* fall back to stacking on small screens */
+                margin: 1em 0;
+            }
+
+            .video-row video {
+                width: calc(50% - 0.5em); /* Two videos per row with 1em total gap */
+                max-width: 400px; /* limit individual size on large screens */
+                height: auto;
+            }
+
+            .video-row3 {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 1em;
+                flex-wrap: wrap; /* fall back to stacking on small screens */
+                margin: 1em 0;
+            }
+            .video-row3 video {
+                width: calc(33.33% - 0.66em); /* Three videos per row with 1em total gap */
+                max-width: 300px; /* limit individual size on large screens */
+                height: auto;
+            }
+
+            
+            img {
+                max-width: 100%;
+                height: auto;
+                margin: 0.5em auto;
+                display: block;
+            }
+            
+            /* Navigation toggle button */
+            .nav-toggle {
+                position: fixed;
+                top: 1.5em;
+                left: 1.5em;
+                z-index: 1001;
+                background: #687351;
+                color: white;
+                border: none;
+                padding: 0.7em 0.8em;
+                border-radius: 6px;
+                cursor: pointer;
+                font-size: 1em;
+                transition: all 0.2s ease;
+                box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            }
+            
+            .nav-toggle:hover {
+                background: #5a6347;
+                transform: translateY(-1px);
+                box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            }
+            
+            .nav-toggle.nav-open {
+                opacity: 0;
+                pointer-events: none;
+            }
+            
+            /* Media queries for responsive design */
+            @media screen and (max-width: 768px) {
+                #main {
+                    width: 95%;
+                    padding: 4em 1em 1em;
+                }
+                
+                #main.nav-open {
+                    margin-left: 0;
+                }
+                
+                h1 {
+                    font-size: 1.5rem;
+                }
+                
+                h2 {
+                    font-size: 1.3rem;
+                }
+                
+                .nav-bar {
+                    width: 220px;
+                }
+                
+                .nav-toggle {
+                    top: 1em;
+                    left: 1em;
+                }
+                
+                /* Keep uniform video sizing on mobile */
+                .video-container video {
+                    width: 95%;
+                    max-width: none;
+                }
+            }
+            
+            .nav-toggle {
+                display: block;
+            }
+        </style>
+    </head>
+    <body id="top">
+        <!-- Collapsible Left Navigation -->
+        <button class="nav-toggle" id="navToggle">☰</button>
+        <nav class="nav-bar" id="navBar">
+            <div class="nav-header">
+                <div class="nav-title">DexMachina</div>
+                <button class="nav-close" id="navClose">✕</button>
+            </div>
+            <div class="nav-links">
+                <a href="#abstract">Abstract</a>
+                <a href="#method">Method</a>
+                <a href="#experiments">Experiments</a> 
+                <a href="#arm-ik">Feasibility of Arm Kinematics</a>
+                <a href="#randomize">RL with Domain Randomization</a>
+                <a href="#reward-weights">Reward Weights Ablation</a>
+                <a href="#curriculum-hyperparams">Curriculum Hyperparameters</a>
+                <a href="#extra-long">Extra Long Horizon</a>
+            </div>
+        </nav>
+        
+        <div id="main">
+            <section id="four">
+                
+                <h1>
+                    DexMachina: Functional Retargeting for <br> Bimanual Dexterous Manipulation 
+                </h1>  
+                
+                <a href="https://drive.google.com/drive/folders/14bV9wv-cFfijbdTFfUlriwA-3FYffzsd?usp=sharing" style="display: block; text-align: center">Annoymized Codebase</a>
+                
+                
+                <div class="video-container">
+                    <video controls autoplay muted playsinline>
+                        <source src="compressed-dexmachina-teaser.mp4"> 
+                    </video> 
+                </div> 
+                
+                
+                
+
+                <h2 id="abstract">
+                    Abstract
+                </h2> 
+                <p>
+                    We study the problem of functional retargeting: learning dexterous manipulation policies to track object states from human hand-object demonstrations. We focus on long-horizon, bimanual tasks with articulated objects, which is challenging due to large action space, spatiotemporal discontinuities, and embodiment gap between human and robot hands. 
+                    We propose DexMachina, a novel curriculum-based algorithm: the key idea is to use virtual object controllers with decaying strength: an object is first driven automatically towards its target states, such that the policy can gradually learn to take over under motion and contact guidance. 
+                    We release a simulation benchmark with a diverse set of tasks and dexterous hands, and show that DexMachina significantly outperforms baseline methods. Our algorithm and benchmark enable a functional comparison for hardware designs, and we present key findings informed by quantitative and qualitative results. 
+                    With the recent surge in dexterous hand development, we hope this work will provide a useful platform for identifying desirable hardware capabilities and lower the barrier for contributing to future research.
+                </p> 
+                <div class="image-container">
+                    <img src="dexmachina-teaser-website.png" alt="DexMachina Teaser" style="max-width: 80%;" /> 
+                </div>
+            </section>
+            
+            <section>
+                <h2 id="method">Method</h2> 
+                <h3 id="overview">Method Overview</h3>
+
+                <p>
+                    We propose DexMachina, a novel algorithm that achieves functional retargeting for a variety of hands and objects. 
+                    At a high-level, we train an RL policy using a virtual object controller curriculum, guided by both a task reward and auxiliary rewards.
+                </p> 
+                <div class="image-container">
+                    <img src="assets/dexmachina-method.jpg" alt="DexMachina Method" style="max-width: 85%;" />
+                </div>
+ 
+                <h3 id="rewards">Task and Auxiliary Rewards</h3>
+                <p>
+                    Given one demonstration, we first use its object states to define task reward. Next, we run a collision-aware kinematic retargeting procedure, which produces reference dexterous hand motions: we use them for motion imitation reward and residual wrist actions. We then approximate hand-object contact positions, which we use to define contact reward. 
+                </p>
+                <div class="video-container">
+                    <video controls autoplay muted playsinline>
+                        <source src="assets/compressed-dexmachina-method-video.mp4">
+                    </video> 
+                </div>
+
+                <h3>Virtual Object Controller Curriculum</h3>
+                <p>
+                    The reward terms and residual action learning can sometimes achieve short and simple tasks, but struggle on long-horizon clips with complex contacts, where the policy often experiences catastrophic early failures.
+                    This motivates us to propose a novel curriculum approach, to let the policy explore different strategies in a less fragile setting. 
+                </p>
+                <div class="video-container">
+                    <video controls autoplay muted playsinline>
+                        <source src="assets/compressed-dexmachina-voc-video.mp4">
+                    </video> 
+                </div>
+            </section>
+
+            <section>
+                <h2 id="experiments">Experiment Results</h2>
+
+                <h3 id="exp-setup">Experiment Setup</h3>
+                <p>
+                    To evaluate dexmachina, we use a subset of ARCTIC data which includes 5 articulated objects and 7 clips consisting of diverse motion sequences and both long and short-horizon demonstrations. 
+                    We curate assets for 6 open-source dexterous robot hand models, with varying sizes and kinematic designs.
+                </p>
+                <div class="video-container">
+                    <video controls autoplay muted playsinline>
+                        <source src="assets/compressed-dexmachina-exp-setup-video.mp4">
+                    </video> 
+                </div>
+
+                <h3>DexMachina outperforms baseline methods across all tasks and hands</h3>
+
+                <p>
+                    We first evaluate on 4 hands. We compare dexmachina with direct replay of kinematic retargeting results, two baseline methods, and training with our proposed rewards but without curriculum. With rare exceptions, our method consistently achieves the best performance across all the hands and tasks, especially on long-horizon tasks with complex motion sequences. 
+                </p>
+
+                <div class="image-container">
+                    <img src="assets/yolo_ADD_AUC.png" alt="DexMachina Yolo AUC" style="max-width: 80%;" />
+                </div> 
+
+                <h3>Kinematic retargeting does not produce feasible actions</h3>
+                <p>
+                    Without policy learning, kinematic retargeting can produce human-like hand motions, but when we play the retargeting results in simulation, they are not feasible for completing the task.
+                </p>
+                <div class="video-container">
+                    <video controls autoplay muted playsinline>
+                        <source src="assets/compressed-dexmachina-kine-video.mp4">
+                    </video> 
+                </div> 
+
+                <h3>DexMachina handles long task horizons without early failures</h3>
+                <p>
+                    Compared to ObjDex baseline which uses only task reward, our method can handle longer horizon tasks without early failures.
+                </p>
+                <div class="video-container">
+                    <video controls autoplay muted playsinline>
+                        <source src="assets/compressed-dexmachina-objdex-video.mp4">
+                    </video>
+                </div>
+                
+                <h3>DexMachina allows policies to adapt to their hardware constraints</h3>
+                <p> 
+                    For example, on the Notebook task, the XHand policy follows the human demonstrator to use the left hand to hold up the object and the right hand to close the cover,
+                    But for the smaller, less-actuated Inspire Hand, the policy learns to use both hands to stabilize the object and close the cover, despite using the same human hand motion reference as Xhand.
+                    Similarly, for the Mixer task, Allegro Hand uses its longer and more flexible thumb to close the mixer lid, but Schunk Hand learns to move the wrist forward and close with its palm. 
+                </p>
+                <div class="image-container">
+                    <img src="assets/dexmachina-qual-highlighted.001.jpeg" alt="DexMachina Qualitative Results" style="max-width: 70%;" />
+                </div> 
+
+                <h3>DexMachina enables a functional comparison between hardware designs</h3>
+                <p> 
+                    With an effective functional retargeting algorithm, we can now perform a functional comparison between different dexterous hands. We focus on the 4 long-horizon tasks, and evaluate dexMachina on two additional hands. We compare the performance of all the hands and discuss key empirical findings. 
+                    Overall, we see the larger, fully-actuated hands can achieve both higher final performance and better learning efficiency.
+                    Interestingly, degrees of freedom is more important than hand sizes.
+                    Schunk hand and Xhand, for example, have more actuated fingers, and perform much better than Inspire hand and ability hand which are similar in size to human hands
+
+                    With the recent surge in dexterous hand development, we hope our work will provide a useful platform, that can help identify desirable hardware capabilities and lower the contribution barrier for future research. 
+                </p>
+                <div class="image-container">
+                    <img src="assets/dexmachina-6hands.001.jpeg" alt="DexMachina 6 Hands" style="max-width: 80%;" />
+                </div> 
+
+                <h3>Additional Policy Evaluation Videos</h3>
+                
+                <p>
+                    Using our method on the 3 short-horizon tasks, all hands can achieve between 70 to up to 90% success rate in object tracking AUC-ADD metric.
+                </p>
+                <div class="video-container">
+                    <video controls autoplay muted playsinline>
+                        <source src="assets/compressed-dexmachina-ours-short3-video.mp4">
+                    </video> 
+                </div>
+            </section> 
+
+            <h3 id="arm-ik">Feasibility of Arm Kinematics</h3>
+                <p> We use a basic IK setup to qualitatively demonstrate the feasibility of extending DexMachina to consider robot arm kinematics. 
+                    In the below videos, we use our trained RL policy to produce bimanual wrist poses for a pair of dexterous hands, then use the wrist
+                    poses as targets for inverse kinematics (IK) to generate arm joint values for a Fourier GR1 humanoid robot. 
+                    Despite occasional jittering motions, we remark the learned wrist actions are generally achievable by robot arms, 
+                    and a promising direction for future is extending our RL training to full arm control, or further constrain the wrist motion range to adapt to arm-specific kinematic constraints. 
+                </p>
+                <div class="video-container">
+                    <video controls autoplay muted playsinline>
+                        <source src="assets/dexmachina-arm-ik.mp4">
+                    </video> 
+                </div>
+
+            <h3 id="randomize"> RL with Domain Randomization</h3>
+            <p> To address the conern regarding robustness of learned finger motions, we provide additonal experiments where we randomize the physics parameters during RL training. 
+                Videos below show qualitative comparison between a policy trained without randomized physics, and another policy trained in the same setup but 
+                the object's mass is randomly varied (we add a delta mass value randomly sampled from -0.1kg to 0.5kg). 
+                We observe the policy trained with randomization (left video) learns to make more stable contact between the Inspire hand and ketchup bottle, 
+                while achieving similar object tracking accuracy as the original policy trained without randomization (right video).
+                These results suggest incorporating domain randomization during training can improve the robustness of learned behavior, to make it less brittle to changing object dynamics, 
+                and potentially facilliate sim-to-real transfer, which is a promising direction for future work.
+            </p> 
+
+            <div class="video-row">
+                <video src="assets/rebuttal-inspire-ketchup100-rand-mass.mp4" controls muted loop></video>
+                <video src="assets/rebuttal-inspire-ketchup100-norand.mp4" controls muted loop></video>
+            </div>
+            
+            
+            <h3 id="reward-weights"> Reward Weights Ablation</h3>
+
+            <p> We provide additional experiments to show the effect of different reward weights on policy performance. 
+                The maximum achievable reward for both the task reward and each auxiliary reward term is always 1.0, and the task reward is always weighted with 1.0.
+                In the experiments below, we vary the weights for motion imitation, behavior cloning and contact rewards, while keeping other settings exactly the same. 
+                Each curve uses a different combination of reward weights, and we plot the task reward (which directly reflects object tracking performances) and auxiliary rewards. 
+                The sub-plot 'Episode Task Reward' plots the cumulative task reward achieved in each episode, which directly reflects the policy's object tracking performance.
+
+                Although we could not finish an exhaustive pass on all the possible weight combinations due to the limited bandwidth during this rebuttal period, we remark the overall trend that
+                the task performance is relatively robust to different auxiliary reward weights. 
+                The slight fluctuations in the Episode Task Reward curves will likely be smoothed out when averaged across multiple random seeds. 
+            </p>
+
+            <div class="image-container">
+                <img src="iclr-rebuttal-rew-weights.png" alt="DexMachina Reward Weights Ablation" style="max-width: 80%;" />
+            </div>
+
+            <h3 id="curriculum-hyperparams"> Curriculum Hyperparameters</h3>
+            <p> 
+                We provide additional experiments to test the sensitivity of our RL training to different hyperparameters in our VOC curriculm.
+                Note that the curves are plotted with a heavier width when the VOC controller gains are reduced to 0, i.e. no virtual forces are applied and the policy must take over the manipulation.
+                Again, 'Episode Task Reward' plots the cumulative task reward achieved in each episode, which directly reflects the policy's object tracking performance.
+
+            </p>
+            
+            <ol> 
+                  <li style="font-size: 0.99em; font-weight: bold;">Decay reward thresholds.</li>
+                    <p>We keep a separate deque and threshold for each reward term (i.e. task reward, contact reward, imitation reward), 
+                        and only decay the curriculum's VOC controller gains when the achieved rewards are above the given threshold. 
+                        In the below experiments, we keep the task reward threshold the same (0.6) and compare using 0.01 vs 0 for the auxiliary rewards thresholds. 
+                        We observe that, while the two cases achieve similar task reward after VOC controller gains are decayed to zero and both have a downward trend on the auxiliary rewards, 
+                        having a non-zero threshold helps the policy achieve higher auxiliary rewards, and we qualitatively see a style difference in the learned policy behaviors. 
+                        This suggests our framework offers flexibility that allows a user to adjust the policy behaviors by tuning these thresholds while not interfering with the task performance.
+                </p>
+                <img src="iclr-rebuttal-reward-thres.png" style="max-width: 80%;" />
+                
+                <li style="font-size: 0.99em; font-weight: bold;">Curriculum rewards dequeue lengths.</li>
+                    <p> We compare different deque lengths (30, 60, 90) under the same task and robot hand setting. 
+                        Intuitively, a longer deque means the moving reward average gets updated more slowly. 
+                        Hence we observe overall similar task reward outcomes, but slightly slower decay when the deque length is longer, i.e. the policy requires more iterations before transitioning
+                        to the next curriculum stage with lower VOC controller gains.
+                    </p>
+                    <img src="iclr-rebuttal-deque-length.png" alt="DexMachina Curriculum Deque Length Ablation" style="max-width: 80%;" />
+                    
+                
+                <li style="font-size: 0.99em; font-weight: bold;">VOC controller gain decay ratio.</li>
+                    <p> 
+                        In our VOC curriculum, the controller gain values (i.e. kp and kv) are drawn from a uniform distribution with decaying upper and lower bounds. 
+                        For kp, we sample (N,) different values (N is number of parallel RL environments) from where the bounds are exponentially decayed at every iteration where the rewards are above their respective thresholds.
+
+                        The sampling distribution is Uniform~[kp_lower, kp_upper], where at each decay,
+                        kp_lower = kp_lower_prev * kp_decay_factor_lower,  kp_upper = kp_upper_prev * kp_decay_factor_upper.  
+                        
+                        Therefore, different decay_factors determine different schedule of decaying ranges for the gain distributions. 
+                        In the additional experiments below, we fix kp_decay_factor_upper=0.9 and vary kp_decay_factor_lower from 0.5 to 0.8 (hence the plotted kp ranges are 'wider' vs 'narrower'), 
+                        and show that the task performance (i.e. object tracking accuracy) is relatively insensitive to different bounds. 
+                        The reward fluctuations will likely be smoothed out when averaged across multiple random seeds.
+                        
+                    </p>
+                    <img src="iclr-rebuttal-decay-ratio.png" alt="DexMachina Curriculum Decay Ratio Ablation" style="max-width: 80%;" />
+            <h3 id="extra-long"> Extra Long Horizon</h3>
+
+                    <p> We show our method can successfully handle longer-horizon tasks than our main experiments.
+                        The main experiments in the paper used human demonstrations of up to 300 time-steps, 
+                        here we extend it to up to 600 steps on the same box and mixer demonstrations. 
+                        Below we show qualitative video of the learned policies where the Allegro hand successfully completes the following human demonstration clips (we mark them as object-start-end):
+                        left: Mixer-0-500, middle: Box-30-530, right: Box-0-600.
+                    </p> 
+                    <div class="video-row3">
+                        <video src="mixer-0-500.mp4" controls muted loop></video>
+                        <video src="box-30-530.mp4" controls muted loop></video>
+                        <video src="box-0-600.mp4" controls muted loop></video>
+                    </div>
+
+        
+        
+        <script>
+            // Navigation toggle functionality
+            const navToggle = document.getElementById('navToggle');
+            const navBar = document.getElementById('navBar');
+            const navClose = document.getElementById('navClose');
+            const mainContent = document.getElementById('main');
+            
+            function openNav() {
+                navBar.classList.add('visible');
+                navToggle.classList.add('nav-open');
+            }
+            
+            function closeNav() {
+                navBar.classList.remove('visible');
+                navToggle.classList.remove('nav-open');
+            }
+            
+            navToggle.addEventListener('click', function() {
+                if (navBar.classList.contains('visible')) {
+                    closeNav();
+                } else {
+                    openNav();
+                }
+            }); 
+            
+            // Close nav when clicking the close button
+            navClose.addEventListener('click', closeNav);
+            
+            // Close nav when clicking on a link
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.addEventListener('click', function() {
+                    // Small delay to allow smooth scrolling to complete
+                    setTimeout(closeNav, 100);
+                });
+            });
+            
+            // Close nav when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!navBar.contains(e.target) && 
+                    !navToggle.contains(e.target) && 
+                    navBar.classList.contains('visible')) {
+                    closeNav();
+                }
+            });
+            
+            // Close nav on escape key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && navBar.classList.contains('visible')) {
+                    closeNav();
+                }
+            });
+            
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+            
+            // Add click functionality for heading links to update URL
+            document.querySelectorAll('h2, h3').forEach(heading => {
+                heading.style.cursor = 'pointer';
+                heading.addEventListener('click', function() {
+                    const id = this.getAttribute('id');
+                    if (id) {
+                        // Update the URL hash without scrolling
+                        history.pushState(null, null, '#' + id);
+                        
+                        // Optional: Also copy to clipboard
+                        const url = window.location.href;
+                        if (navigator.clipboard) {
+                            navigator.clipboard.writeText(url).then(() => {
+                                console.log('Link copied to clipboard: ' + url);
+                            }).catch(() => {
+                                // Fallback if clipboard API fails
+                                console.log('Link updated in URL bar: ' + url);
+                            });
+                        }
+                    }
+                });
+            });
+        </script>
+    </body>
+</html>
